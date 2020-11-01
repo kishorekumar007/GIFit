@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="gifCell" rowHeight="256" id="fok-UA-pXJ" customClass="FeedTableCell" customModule="GIFfit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="437" height="256"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fok-UA-pXJ" id="4or-JI-fYE">
+                <rect key="frame" x="0.0" y="0.0" width="437" height="256"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1e2-yw-V16">
+                        <rect key="frame" x="10" y="8" width="417" height="200"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Ii-76-CKt">
+                                <rect key="frame" x="0.0" y="0.0" width="417" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="zIK-LO-6rh"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="9Ii-76-CKt" firstAttribute="top" secondItem="1e2-yw-V16" secondAttribute="top" id="1Lx-cJ-puh"/>
+                            <constraint firstAttribute="trailing" secondItem="9Ii-76-CKt" secondAttribute="trailing" id="BYe-kL-rMg"/>
+                            <constraint firstAttribute="bottom" secondItem="9Ii-76-CKt" secondAttribute="bottom" id="a93-RF-mke"/>
+                            <constraint firstItem="9Ii-76-CKt" firstAttribute="leading" secondItem="1e2-yw-V16" secondAttribute="leading" id="lbK-Ql-8DK"/>
+                        </constraints>
+                    </view>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSl-8i-0VV" userLabel="favBtnContainer">
+                        <rect key="frame" x="377" y="8" width="50" height="50"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vik-di-wb5" userLabel="badge">
+                                <rect key="frame" x="0.0" y="-50" width="100" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdM-bS-G18">
+                                        <rect key="frame" x="20" y="58" width="22" height="22"/>
+                                        <state key="normal" image="star" catalog="system"/>
+                                        <connections>
+                                            <action selector="toggleFavouriteFlag:" destination="fok-UA-pXJ" eventType="touchUpInside" id="LRz-Ff-OYK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.48547535211267606" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Vik-di-wb5" secondAttribute="height" id="Mkn-3B-DeQ"/>
+                                    <constraint firstAttribute="width" constant="100" id="kCZ-0w-mol"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQs-hh-H5E">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <connections>
+                                    <action selector="toggleFavouriteFlag:" destination="fok-UA-pXJ" eventType="touchUpInside" id="N7i-Mh-KUv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Vik-di-wb5" secondAttribute="trailing" constant="-50" id="2aq-CC-gRS"/>
+                            <constraint firstItem="uQs-hh-H5E" firstAttribute="leading" secondItem="ZSl-8i-0VV" secondAttribute="leading" id="DDV-Fe-bBB"/>
+                            <constraint firstItem="GdM-bS-G18" firstAttribute="leading" secondItem="ZSl-8i-0VV" secondAttribute="leading" constant="20" id="Eeu-db-5Xk"/>
+                            <constraint firstItem="Vik-di-wb5" firstAttribute="top" secondItem="ZSl-8i-0VV" secondAttribute="top" constant="-50" id="MQc-kX-5wv"/>
+                            <constraint firstItem="uQs-hh-H5E" firstAttribute="top" secondItem="ZSl-8i-0VV" secondAttribute="top" id="QUD-bD-IfA"/>
+                            <constraint firstAttribute="bottom" secondItem="GdM-bS-G18" secondAttribute="bottom" constant="20" id="d3S-hT-87t"/>
+                            <constraint firstAttribute="trailing" secondItem="uQs-hh-H5E" secondAttribute="trailing" id="mdW-Mh-kyq"/>
+                            <constraint firstAttribute="width" constant="50" id="pqm-re-1cj"/>
+                            <constraint firstAttribute="bottom" secondItem="uQs-hh-H5E" secondAttribute="bottom" id="ps4-XZ-gOI"/>
+                            <constraint firstAttribute="width" secondItem="ZSl-8i-0VV" secondAttribute="height" id="wiW-w7-cAe"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ZSl-8i-0VV" firstAttribute="top" secondItem="1e2-yw-V16" secondAttribute="top" id="0XK-kI-PUf"/>
+                    <constraint firstAttribute="trailing" secondItem="1e2-yw-V16" secondAttribute="trailing" constant="10" id="0fi-9z-Ug4"/>
+                    <constraint firstItem="ZSl-8i-0VV" firstAttribute="trailing" secondItem="1e2-yw-V16" secondAttribute="trailing" id="jXr-eY-jXB"/>
+                    <constraint firstItem="1e2-yw-V16" firstAttribute="leading" secondItem="4or-JI-fYE" secondAttribute="leading" constant="10" id="wGD-CL-ID0"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1e2-yw-V16" secondAttribute="bottom" constant="8" id="wcd-na-JUx"/>
+                    <constraint firstItem="1e2-yw-V16" firstAttribute="top" secondItem="4or-JI-fYE" secondAttribute="top" constant="8" id="wnL-bf-K6e"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="badgeBG" destination="Vik-di-wb5" id="ioe-Sp-2D0"/>
+                <outlet property="favoruiteButton" destination="GdM-bS-G18" id="xe6-il-CSQ"/>
+                <outlet property="gifImageView" destination="9Ii-76-CKt" id="xwo-Vo-a58"/>
+                <outlet property="imageContainer" destination="1e2-yw-V16" id="Nkl-n2-TTS"/>
+            </connections>
+            <point key="canvasLocation" x="-403.62318840579712" y="62.276785714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="star" catalog="system" width="128" height="116"/>
+    </resources>
+</document>
