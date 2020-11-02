@@ -27,7 +27,8 @@ class FeedTableCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.gifImageView.currentImage = nil
+        self.gifImageView.clear()
+        
     }
     
     override func layoutSubviews() {

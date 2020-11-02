@@ -26,6 +26,11 @@ class FavouriteGifCell: UICollectionViewCell {
         // Initialization code
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.gifImageView.clear()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         if tag == 0 {

@@ -8,6 +8,8 @@
 import Foundation
 import SwiftyGif
 
+let gifManager = SwiftyGifManager.init(memoryLimit: 10)
+
 
 
 struct GifCellViewModel:Hashable {
@@ -106,7 +108,7 @@ struct GifCellViewModel:Hashable {
         guard let url = url else {
             return
         }
-        cell.gifImageView.setGifFromURL(url)
+        cell.gifImageView.setGifFromURL(url, manager: gifManager)
     }
     
     func toggleFavoruiteFlag() {

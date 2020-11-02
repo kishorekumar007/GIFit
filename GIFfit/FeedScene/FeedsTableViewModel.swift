@@ -54,7 +54,7 @@ class FeedTableModel:CommonListViewModel {
                     for: indexPath
                 ) as? FeedTableCell
                 cell?.setup(viewModel: self.viewModels[indexPath.row])
-                print(viewModel.id, viewModel.isFavourite)
+//                print(viewModel.id, viewModel.isFavourite)
                 return cell
             }
         )
@@ -81,13 +81,14 @@ class FeedTableModel:CommonListViewModel {
             clearData()
         }
         super.insert(models: models)
-        print(viewModels.map({$0.id}))
+        
+//        print(viewModels.map({$0.id}).joined(separator: "\n"))
 
         var snapshot = NSDiffableDataSourceSnapshot<String, GifCellViewModel>()
         snapshot.appendSections([AppConstants.shared.listSectionId])
         snapshot.appendItems(viewModels)
         dataSource.apply(snapshot, animatingDifferences: false)
-        offset += models.count
+        offset = viewModels.count
     }
     
     /// update viewmode in datasoruce
@@ -95,7 +96,7 @@ class FeedTableModel:CommonListViewModel {
     override func updated(newModel: GifCellViewModel) {
         super.updated(newModel: newModel)
         var snapshot = dataSource.snapshot()
-        print(newModel.id)
+//        print(newModel.id)
         snapshot.reloadItems([newModel])
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -103,7 +104,7 @@ class FeedTableModel:CommonListViewModel {
     /// If viewmodel changed notifiation wil be triggred with updated model
     /// - Parameter notification:notification object
     @objc func reloadDataSource(notification:Notification) {
-        print(viewModels.map({$0.id}))
+//        print(viewModels.map({$0.id}))
         guard let model = notification.object as? GifCellViewModel, self.viewModels.contains(model) else {
             return
         }
@@ -200,9 +201,8 @@ extension FeedTableModel:UITableViewDelegate {
     func tableView(_ tableView: UITableView,
       contextMenuConfigurationForRowAt indexPath: IndexPath,
       point: CGPoint) -> UIContextMenuConfiguration? {
-        guard var viewModel = dataSource.itemIdentifier(for: indexPath) else {return nil}
-        return viewModel.getContextMenuConfig(for: dataSource.tableView(tableView, cellForRowAt: indexPath)) { () -> UIViewController? in
-            PreviewController(viewModel: viewModel)
+        return viewModels[indexPath.row].getContextMenuConfig(for: dataSource.tableView(tableView, cellForRowAt: indexPath)) { () -> UIViewController? in
+            PreviewController(viewModel: self.viewModels[indexPath.row])
         }
     }
     

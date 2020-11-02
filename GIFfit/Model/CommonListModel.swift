@@ -121,6 +121,8 @@ class CommonListViewModel:NSObject {
     /// Insert action
     /// - Parameter models: models to be inserted
     func insert(models: [GifCellViewModel]) {
+        var models = models
+        models.removeAll(where: {viewModels.contains($0)})
         viewModels.append(contentsOf: models)
     }
     
