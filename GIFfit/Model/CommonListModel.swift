@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 /// If any changes in model use this protocol to update
 protocol MasterDataSource {
@@ -78,40 +79,65 @@ class CommonListViewModel:NSObject {
     internal var viewModels:[GifCellViewModel] = []
 
     
+    var cancellable:AnyCancellable?
+    
     /// Fetch the gipfy data using
     /// - Parameters:
     ///   - type: FetchType
     ///   - completion: Completion with GipfyModel
+    
     func fetch(type:FetchType, dataSource:MasterDataSource) {
         isFetching = true
-        URLSession.shared.giphyModel(with: type) { [weak self] (model, resp, error) in
-            
-            guard let model = model else {
-                self?.notifyView(title:"Error", message:(error?.localizedDescription ?? "GiphyModel View Model is nill"))
-                self?.isFetching = false
-
-                return
-            }
-            
-            if model.meta?.status == 200 {
-                
-                if let viewModel = model.data {
-                    DispatchQueue.main.async {
-                        self?.insert(models:viewModel.compactMap({GifCellViewModel.init(gifData: $0, dataSource: dataSource)}))
-                    }
+        cancellable = URLSession.shared.dataTaskPublisher(for: type.fetchURL)
+            .map({$0.data})
+            .decode(type: GiphyModel.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .compactMap({ (val) -> [GifData]? in
+                if val.meta?.status == 200 {
+                    return val.data
                 }
-                
-            }
-            else {
-                self?.notifyView(title: (model.meta?.status?.string ?? "Error"), message:(model.meta?.msg ?? "Unknown Error"))
+                self.notifyView(title: (val.meta?.status?.string ?? "Error"), message:(val.meta?.msg ?? "Unknown Error"))
+                return nil
+            }).sink { (result) in
+                switch result {
+                case .failure(let error):
+                    self.delegate?.showMessage(title: "Error", message: "\(error.localizedDescription)")
+                case .finished:
+                    self.isFetching = false
+                }
+            } receiveValue: { (data) in
+                self.isFetching = false
+                self.insert(models: data.compactMap({GifCellViewModel.init(gifData: $0, dataSource: dataSource)}))
             }
             
-            DispatchQueue.main.async {
-                self?.delegate?.setBottomLoader(false)
-                self?.isFetching = false
-            }
-            
-        }.resume()
+//        URLSession.shared.giphyModel(with: type) { [weak self] (model, resp, error) in
+//
+//            guard let model = model else {
+//                self?.notifyView(title:"Error", message:(error?.localizedDescription ?? "GiphyModel View Model is nill"))
+//                self?.isFetching = false
+//
+//                return
+//            }
+//
+//            if model.meta?.status == 200 {
+//
+//                if let viewModel = model.data {
+//                    DispatchQueue.main.async {
+//                        self?.insert(models:viewModel.compactMap({GifCellViewModel.init(gifData: $0, dataSource: dataSource)}))
+//                    }
+//                }
+//
+//            }
+//            else {
+//                self?.notifyView(title: (model.meta?.status?.string ?? "Error"), message:(model.meta?.msg ?? "Unknown Error"))
+//            }
+//
+//            DispatchQueue.main.async {
+//                self?.delegate?.setBottomLoader(false)
+//                self?.isFetching = false
+//            }
+//
+//        }.resume()
     }
     
     func notifyView(title:String, message:String) {
@@ -167,17 +193,64 @@ class CommonListViewModel:NSObject {
         }
             
         //download from web and stored locally
-        URLSession.shared.download(model: model) { [weak self](fileLocation) in
-            DispatchQueue.main.async {
-                self?.delegate?.setDownloadIndicator(enable: false)
-                if fileLocation == nil {
-                    self?.delegate?.showMessage(title: "Error", message: "Couldn't download image! Try again.")
+        func createFile(for model:GifCellViewModel, data:Data?) -> URL? {
+                        
+            guard let fileData = data else {
+                return nil
+            }
+            
+            guard let url = FileManager.documentDirURL?.appendingPathComponent("\(model.id).gif") else {
+                return nil
+            }
+            
+            do {
+                if FileManager.default.fileExists(atPath: url.absoluteString) {
+                    try fileData.write(to: url, options: .atomic)
                 }
                 else {
-                    self?.delegate?.shareSheet(source: view, data: [url])
+                    try fileData.write(to: url, options: .atomic)
                 }
+                
+                return url
             }
-        }?.resume()
+            catch {
+                return nil
+            }
+        }
+                
+        self.cancellable = URLSession.shared.dataTaskPublisher(for: model.url!)
+            .map({$0.data})
+            .receive(on: DispatchQueue.global(qos: .background))
+            .sink { (finish) in
+                switch finish {
+                case .failure(_):
+                    self.notifyView(title: "Error", message: "Couldn't download image! Try again.")
+                case .finished:
+                    break
+                }
+            } receiveValue: { (data) in
+                guard let fileurl = createFile(for: model, data: data) else {
+                    self.notifyView(title: "Error", message: "Couldn't download image! Try again.")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.delegate?.shareSheet(source: view, data: [fileurl])
+                }
+                
+            }
+
+
+//        URLSession.shared.download(model: model) { [weak self](fileLocation) in
+//            DispatchQueue.main.async {
+//                self?.delegate?.setDownloadIndicator(enable: false)
+//                if fileLocation == nil {
+//                    self?.delegate?.showMessage(title: "Error", message: "Couldn't download image! Try again.")
+//                }
+//                else {
+//                    self?.delegate?.shareSheet(source: view, data: [url])
+//                }
+//            }
+//        }?.resume()
     }
     
     
