@@ -4,7 +4,7 @@ Do you have an app to search, store a favourite or share GIFs with your friends?
 
 ## Configure Project
 
-After you download this project, just go to your folder and do pod install.
+After you download this project, just go to your folder in terminal and do pod install.
 
 ## First Look
 
