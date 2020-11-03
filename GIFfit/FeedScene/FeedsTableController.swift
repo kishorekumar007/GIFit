@@ -23,6 +23,7 @@ class FeedsTableController: UITableViewController {
     //    MARK: View cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         tableView.register(FeedTableCell.nib, forCellReuseIdentifier: FeedTableCell.identifier)
 
@@ -67,6 +68,10 @@ class FeedsTableController: UITableViewController {
 //    MARK: Handler UI notifiacitonn from TableViewListViewModel
 
 extension FeedsTableController: ListUIUpdate {
+    func pushPreviewController(model: GifCellViewModel) {
+        self.navigationController?.pushViewController(PreviewController(viewModel: model), animated: true)
+    }
+    
     func shareSheet(source view: UIView?, data: [Any]) {
         self.openShareSheet(data, popFromView: view ?? self.view)
     }
@@ -102,3 +107,5 @@ extension FeedsTableController: ListUIUpdate {
     }
 
 }
+
+

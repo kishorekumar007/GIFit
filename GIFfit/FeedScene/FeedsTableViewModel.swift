@@ -206,6 +206,21 @@ extension FeedTableModel:UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        // Then animate the appearance of the VC with the provided animator
+        animator.addAnimations {
+            guard let id = configuration.identifier as? NSString, let model = self.viewModels.first(where: {$0.id == id as String}) else{
+                return
+            }
+            self.delegate?.pushPreviewController(model: model)
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.pushPreviewController(model: viewModels[indexPath.row])
+    }
+    
 }
 
 //    MARK: Scroll delgate to monitor loadmore

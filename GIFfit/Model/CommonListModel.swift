@@ -51,7 +51,11 @@ protocol ListUIUpdate:class {
     
     /// Present download indicator
     /// - Parameter enable: show/hide flag
-    func setDownloadIndicator(enable:Bool) 
+    func setDownloadIndicator(enable:Bool)
+    
+    /// Push to preview controller
+    /// - Parameter model: gifmodel
+    func pushPreviewController(model:GifCellViewModel)
 }
 
 

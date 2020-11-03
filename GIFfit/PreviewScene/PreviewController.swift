@@ -10,17 +10,29 @@ import SwiftyGif
 
 class PreviewController: UIViewController {
 
-    private let imageView:UIImageView?
+    private let imageView:UIImageView!
+//    private var viewModel:GifCellViewModel
 
     override func loadView() {
         super.loadView()
         view = imageView
+//        guard let url = viewModel.url else {
+//            return
+//        }
+//        imageView = UIImageView(gifURL: url)
+//        view.addSubview(imageView)
+//        imageView?.bindFrameToSuperviewBounds()
+//
+//        // Set up our image view and display the gif
+//        imageView?.clipsToBounds = true
+//        imageView?.contentMode = .scaleAspectFit
+//        imageView?.displaying = true
 
     }
     
 
     init(viewModel: GifCellViewModel) {
-        guard let url = viewModel.url, let size = viewModel.size else {
+        guard let url = viewModel.url else {
             imageView = nil
             super.init(nibName: nil, bundle: nil)
             return
@@ -30,12 +42,15 @@ class PreviewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         // Set up our image view and display the gif
-        imageView?.clipsToBounds = true
-        imageView?.contentMode = .scaleAspectFill
-        imageView?.displaying = true
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.displaying = true
+        imageView.backgroundColor = .systemBackground
+        
+//        imageView.setGifFromURL(url)
         // By setting the preferredContentSize to the image size,
         // the preview will have the same aspect ratio as the image
-        preferredContentSize = size
+        preferredContentSize = viewModel.size ?? .zero
     }
     
     required init?(coder: NSCoder) {
