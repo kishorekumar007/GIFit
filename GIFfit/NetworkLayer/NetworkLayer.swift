@@ -125,7 +125,9 @@ extension URLSession {
         }
         
         return URLSession.shared.dataTask(with: model.url!) { (data, resp, error) in
-            createFile(for: model, data: data)
+            DispatchQueue.global(qos: .background).async {
+                createFile(for: model, data: data)   
+            }
         }
 
     }
