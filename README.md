@@ -19,7 +19,10 @@ Search GIFs in your won way<br>
 
 ## Actions
 You can preivew, share or favourite gifs right away in a stylish way <br>
-![alt text](IMG_5810.PNG)
+<p align="center">
+    </br>
+    <img src="IMG_5810.PNG" align="center" />
+</p>
 
 ## Favourites
 You can view your favourites whenever you want <br>
