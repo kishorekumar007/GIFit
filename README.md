@@ -11,19 +11,19 @@ Do you have an app to search, store a favourite or share GIFs with your friends?
 
 
 ## Search
-Search GIFs in your won way
+Search GIFs in your won way<br>
 ![alt text](IMG_5809.PNG)
 
 ## Actions
-You can preivew a GIF or share or favourite gifs right away in a stylish way 
+You can preivew a GIF or share or favourite gifs right away in a stylish way <br>
 ![alt text](IMG_5810.PNG)
 
 ## Favourites
-You can view your favourites whenever you want
+You can view your favourites whenever you want <br>
 ![alt text](IMG_5811.PNG)
 
 ## Preview
-Goto preview
+Goto preview <br>
 ![alt text](preview.gif)
 
 ## End Note
