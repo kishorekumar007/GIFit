@@ -46,7 +46,7 @@ protocol ListUIUpdate:class {
     /// Open share sheet
     /// - Parameters:
     ///   - view: soruce view
-    ///   - data: url array of stored view
+    ///   - data: url array of stored image
     func shareSheet(source view:UIView?, data:[Any])
     
     /// Present download indicator
