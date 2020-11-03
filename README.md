@@ -2,6 +2,9 @@
 
 Do you have an app to search, store a favourite or share GIFs with your friends? GIFit app resolves your need with a simple UI. 
 
+## Configure Project
+
+After you download this project, just go to your folder and do pod install.
 
 ## First Look
 
