@@ -24,7 +24,7 @@ You can view your favourites whenever you want
 
 ## Preview
 Goto preview
-![alt text](preview.gif)
+![](preview.gif)
 
 ## End Note
 Try this app and share your Feedback
