@@ -4,7 +4,7 @@ Do you have an app to search, favourite or share GIF with your friends? GIFit ap
 
 ## Configure Project
 
-After you download this project, just go to your folder in terminal and do pod install.
+After you download this project, just go to your project folder in terminal and do pod install.
 
 ## First Look
 
