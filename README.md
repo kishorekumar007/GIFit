@@ -1,6 +1,6 @@
 # GIFit 
 
-Do you have an app to search, store a favourite or share GIFs with your friends? GIFit app resolves your need with a simple UI. 
+Do you have an app to search, favourite or share GIF with your friends? GIFit app resolves your needs with a simple UI. 
 
 ## Configure Project
 
@@ -18,7 +18,7 @@ Search GIFs in your won way<br>
 ![alt text](IMG_5809.PNG)
 
 ## Actions
-You can preivew a GIF or share or favourite gifs right away in a stylish way <br>
+You can preivew, share or favourite gifs right away in a stylish way <br>
 ![alt text](IMG_5810.PNG)
 
 ## Favourites
@@ -30,4 +30,4 @@ Goto preview <br>
 ![alt text](preview.gif)
 
 ## End Note
-Try this app and share your Feedback
+Try it out and share your Feedback
