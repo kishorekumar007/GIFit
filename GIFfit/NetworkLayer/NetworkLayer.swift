@@ -21,7 +21,9 @@ enum FetchType {
 
 
         case .search(let qurey, let offset, let limit):
-            requestURL = URL(string:"https://api.giphy.com/v1/gifs/search?api_key=\(AppConstants.shared.api_key)&limit=\(limit)&offset=\(offset)&q=\(qurey)")!
+            let q = qurey.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+
+            requestURL = URL(string:"https://api.giphy.com/v1/gifs/search?api_key=\(AppConstants.shared.api_key)&limit=\(limit)&offset=\(offset)&q=\(q)")!
 
             
         case .trend(let offset, let limit):
