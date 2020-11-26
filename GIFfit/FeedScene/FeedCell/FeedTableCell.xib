@@ -86,6 +86,7 @@
                 <outlet property="badgeBG" destination="Vik-di-wb5" id="ioe-Sp-2D0"/>
                 <outlet property="favoruiteButton" destination="GdM-bS-G18" id="xe6-il-CSQ"/>
                 <outlet property="gifImageView" destination="9Ii-76-CKt" id="xwo-Vo-a58"/>
+                <outlet property="heightConstraint" destination="zIK-LO-6rh" id="bSQ-ZM-Ywk"/>
                 <outlet property="imageContainer" destination="1e2-yw-V16" id="Nkl-n2-TTS"/>
             </connections>
             <point key="canvasLocation" x="-403.62318840579712" y="62.276785714285708"/>

@@ -11,6 +11,7 @@ import SwiftyGif
 class FeedTableCell: UITableViewCell {
 
     @IBOutlet weak var gifImageView: UIImageView!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageContainer: UIView!
     
     @IBOutlet weak var favoruiteButton: UIButton!
@@ -56,6 +57,7 @@ class FeedTableCell: UITableViewCell {
     func setup(viewModel:GifCellViewModel) {
         viewModel.setUpCell(cell: self)
         gifCellViewModel = viewModel
+        heightConstraint.constant = viewModel.size?.height ?? heightConstraint.constant
     }
     
     @IBAction func toggleFavouriteFlag(_ sender: UIButton) {
